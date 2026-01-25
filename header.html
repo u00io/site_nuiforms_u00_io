@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{@title@}</title>
+    <meta name="description" content="{@description@}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        #cookie_notification {
+            display: none;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            width: 390px;
+            max-width: 90%;
+            padding: 25px;
+            background-color: #000000;
+            border-color: #850;
+            border-radius: 4px;
+            box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);
+            border: 1px solid #050;
+        }
+
+        #cookie_notification div {
+            margin: 0;
+            font-size: 12pt;
+            text-align: left;
+            color: #FFFFFF;
+        }
+
+
+        @media (min-width: 576px) {
+            #cookie_notification.show {
+                display: flex;
+            }
+
+            .cookie_accept {
+                margin: 0 0 0 25px;
+                min-width: 120px;
+                max-width: 120px;
+                min-height: 70px;
+                max-height: 70px;
+                color: #0A0;
+                background-color: #111;
+                border: 1px solid #050;
+                border-radius: 4px;
+            }
+
+            .cookie_accept:hover {
+                background-color: #020;
+            }
+        }
+
+        @media (max-width: 575px) {
+            #cookie_notification.show {
+                display: block;
+                text-align: left;
+            }
+
+            .cookie_accept {
+                margin: 10px 0 0 0;
+                min-width: 120px;
+                max-width: 120px;
+                min-height: 70px;
+                max-height: 70px;
+                color: #0A0;
+                background-color: #111;
+                border: 1px solid #050;
+                border-radius: 4px;
+            }
+
+            .cookie_accept:hover {
+                background-color: #020;
+            }
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 20px;
+            background-color: #E1F5FE;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #01579B;
+        }
+
+        a {
+            text-decoration: none;
+            color: #039BE5;
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #0277BD;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 8px 16px;
+            background-color: #03A9F4;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0288D1;
+        }
+        
+        /* Common button styles for reuse across pages */
+        .btn-copy {
+            font-size: 16px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background-color: #6c757d;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-copy:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-copy:active {
+            transform: scale(0.95);
+        }
+        
+        .btn-clear {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background-color: #6c757d;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+        }
+        
+        .btn-clear:hover {
+            background-color: #5a6268;
+        }
+
+        button.big {
+            font-size: 24px;
+            padding: 12px 24px;
+        }
+
+        #header a {
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        #header a:hover {
+            color: #EEEEEE;
+        }
+    </style>
+    <script>
+        // Common SVG icons for reuse
+        const SVG_ICONS = {
+            copy: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+            check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+            clear: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        };
+
+
+        // Enhanced utility function for copying to clipboard with visual feedback and animation
+        function copyInputValueToClipboard(btnId, inputId) {
+            var inputField = document.getElementById(inputId);
+            var copyButton = document.getElementById(btnId);
+            
+            // Check if elements exist
+            if (!inputField) {
+                console.error('Input field not found:', inputId);
+                return;
+            }
+            
+            if (!copyButton) {
+                console.error('Copy button not found:', btnId);
+                return;
+            }
+            
+            var inputValue = inputField.value;
+
+            if (inputValue) {
+                navigator.clipboard.writeText(inputValue).then(function () {
+                    // Add click animation
+                    copyButton.style.transform = 'scale(0.95)';
+                    
+                    // Change icon to green checkmark with animation
+                    setTimeout(function() {
+                        if (copyButton && typeof SVG_ICONS !== 'undefined') {
+                            copyButton.innerHTML = SVG_ICONS.check;
+                            copyButton.style.backgroundColor = '#4CAF50';
+                            copyButton.style.transform = 'scale(1)';
+                        }
+                    }, 100);
+
+                    // Restore original icon after 2 seconds with animation
+                    setTimeout(function () {
+                        if (copyButton && typeof SVG_ICONS !== 'undefined') {
+                            copyButton.style.transform = 'scale(0.95)';
+                            setTimeout(function() {
+                                copyButton.innerHTML = SVG_ICONS.copy;
+                                copyButton.style.backgroundColor = '#6c757d';
+                                copyButton.style.transform = 'scale(1)';
+                            }, 100);
+                        }
+                    }, 2000);
+                }, function (err) {
+                    console.error('Failed to copy to clipboard: ', err);
+                    alert('Failed to copy to clipboard');
+                });
+            } else {
+                alert('No content to copy.');
+            }
+        }
+        
+        // Universal function to initialize copy buttons
+        function initializeCopyButton(buttonId, inputId) {
+            var button = document.getElementById(buttonId);
+            if (button && typeof SVG_ICONS !== 'undefined') {
+                button.innerHTML = SVG_ICONS.copy;
+                button.onclick = function() {
+                    copyInputValueToClipboard(buttonId, inputId);
+                };
+            }
+        }
+        
+        // Universal function to initialize all copy buttons on the page
+        function initializeAllCopyButtons() {
+            // Find all buttons with class 'btn-copy' and set up copy functionality
+            var copyButtons = document.querySelectorAll('.btn-copy');
+            copyButtons.forEach(function(button) {
+                if (typeof SVG_ICONS !== 'undefined') {
+                    button.innerHTML = SVG_ICONS.copy;
+                }
+                
+                // If button has onclick with copyInputValueToClipboard, it's already set up
+                if (button.onclick && button.onclick.toString().includes('copyInputValueToClipboard')) {
+                    return;
+                }
+                
+                // Auto-detect input field based on button's position or data attributes
+                var inputId = button.getAttribute('data-input-id');
+                if (inputId) {
+                    button.onclick = function() {
+                        copyInputValueToClipboard(button.id, inputId);
+                    };
+                }
+            });
+        }
+        // Common utility function for clearing input fields
+        function clearInput(inputId, errorId) {
+            document.getElementById(inputId).value = '';
+            if (errorId) {
+                document.getElementById(errorId).textContent = '';
+            }
+        }
+
+        // Initialize a specific clear button with icon and click handler
+        function initializeClearButton(buttonId, inputId, errorId, customHandler) {
+            var button = document.getElementById(buttonId);
+            if (button) {
+                // Set icon
+                if (typeof SVG_ICONS !== 'undefined') {
+                    button.innerHTML = SVG_ICONS.clear;
+                }
+                
+                // Set click handler
+                button.onclick = function() {
+                    if (customHandler && typeof customHandler === 'function') {
+                        customHandler();
+                    } else {
+                        clearInput(inputId, errorId);
+                    }
+                };
+            }
+        }
+
+        // Universal function to initialize all clear buttons on the page
+        function initializeAllClearButtons() {
+            var clearButtons = document.querySelectorAll('.btn-clear');
+            clearButtons.forEach(function(button) {
+                if (typeof SVG_ICONS !== 'undefined') {
+                    button.innerHTML = SVG_ICONS.clear;
+                }
+                
+                // If button already has onclick, it's already set up
+                if (button.onclick) {
+                    return;
+                }
+                
+                // Auto-detect input field based on data attributes
+                var inputId = button.getAttribute('data-input-id');
+                var errorId = button.getAttribute('data-error-id');
+                
+                if (inputId) {
+                    button.onclick = function() {
+                        clearInput(inputId, errorId);
+                    };
+                }
+            });
+        }
+        // Initialize page when loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize all copy buttons
+            initializeAllCopyButtons();
+            
+            // Initialize all clear buttons
+            initializeAllClearButtons();
+        });
+
+    </script>
+</head>
+
+<body>
+    <div id="header"
+        style="max-width: 1000px; margin: 0 auto; background-color: #03A9F4; border-radius: 12px; padding: 12px;">
+        <div>
+            <a href="/">
+                <div style="display: flex; flex-direction: column;">
+                    <div style="font-size: 28px; font-weight: bold;">
+                        U00
+                    </div>
+                    <div style="font-size: 14px;">
+                        Network tools
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+
+    <div style="max-width: 1000px; margin: 0 auto;">

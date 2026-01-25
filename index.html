@@ -1,0 +1,151 @@
+{#header.html#}
+
+{%title=NuiForms - Minimalist UI library for small applications%}
+{%description=Minimalist UI library for small applications.%}
+
+<style>
+    .hero-section {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #0277BD 0%, #01579B 50%, #003d6b 100%);
+        color: white;
+        margin: -10px -20px 40px -20px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .hero-title {
+        font-size: 3.5em;
+        margin: 0 0 16px 0;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        background: linear-gradient(45deg, #ffffff, #e3f2fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3em;
+        margin: 0 0 32px 0;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+    
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin: 40px 0;
+        padding: 0 20px;
+    }
+    
+    .tool-card {
+        background: white;
+        border-radius: 12px;
+        padding: 32px 24px;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #e1e5e9;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .tool-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #0277BD, #01579B);
+    }
+    
+    .tool-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        border-color: #0277BD;
+    }
+    
+    .tool-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 0 16px 0;
+        padding: 12px;
+        background: linear-gradient(135deg, #0277BD 0%, #01579B 50%, #003d6b 100%);
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .tool-title {
+        font-size: 1.4em;
+        font-weight: 600;
+        margin: 0 0 12px 0;
+        color: #2d3748;
+    }
+    
+    .tool-description {
+        color: #718096;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 2.5em;
+        margin: 60px 0 16px 0;
+        font-weight: 700;
+        color: #2d3748;
+        position: relative;
+    }
+    
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #01579B, #003d6b);
+        border-radius: 2px;
+    }
+    
+    .section-subtitle {
+        text-align: center;
+        color: #718096;
+        font-size: 1.1em;
+        margin: 0 0 40px 0;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5em;
+        }
+        .hero-section {
+            padding: 40px 15px;
+        }
+        .tools-grid {
+            padding: 0 15px;
+        }
+    }
+</style>
+
+<div class="hero-section">
+    <p class="hero-subtitle">
+        Minimalist UI library for small applications.
+    </p>
+</div>
+
+{#bottom.html#}
