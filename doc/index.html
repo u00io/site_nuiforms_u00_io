@@ -1,0 +1,252 @@
+{#header.html#}
+
+{%title=NuiForms - Documentation%}
+{%description=Documentation for NuiForms, a minimalist UI library for small applications.%}
+
+<style>
+    .doc-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        gap: 30px;
+        padding: 20px;
+    }
+    
+    .doc-nav {
+        width: 280px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        background: #2d2d2d;
+        border-radius: 12px;
+        padding: 20px;
+        border: 1px solid #424242;
+    }
+    
+    .doc-nav h3 {
+        margin: 0 0 16px 0;
+        font-size: 1.2em;
+        color: #64B5F6;
+        border-bottom: 2px solid #424242;
+        padding-bottom: 8px;
+    }
+    
+    .doc-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .doc-nav li {
+        margin: 8px 0;
+    }
+    
+    .doc-nav a {
+        display: block;
+        padding: 8px 12px;
+        color: #b0b0b0;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        font-size: 0.95em;
+    }
+    
+    .doc-nav a:hover {
+        background: #363636;
+        color: #81C784;
+    }
+    
+    .doc-nav a.active {
+        background: #363636;
+        color: #64B5F6;
+        border-left: 3px solid #64B5F6;
+        padding-left: 9px;
+    }
+    
+    .doc-content {
+        flex: 1;
+        min-width: 0;
+        background: #2d2d2d;
+        border-radius: 12px;
+        padding: 40px;
+        border: 1px solid #424242;
+    }
+    
+    .doc-content h1 {
+        margin-top: 0;
+        color: #64B5F6;
+        font-size: 2.5em;
+        border-bottom: 3px solid #424242;
+        padding-bottom: 16px;
+        margin-bottom: 32px;
+    }
+    
+    .doc-content h2 {
+        color: #64B5F6;
+        font-size: 1.8em;
+        margin-top: 48px;
+        margin-bottom: 16px;
+        padding-top: 16px;
+        border-top: 2px solid #424242;
+        scroll-margin-top: 20px;
+    }
+    
+    .doc-content h2:first-of-type {
+        border-top: none;
+        margin-top: 0;
+        padding-top: 0;
+    }
+    
+    .doc-content h3 {
+        color: #81C784;
+        font-size: 1.4em;
+        margin-top: 32px;
+        margin-bottom: 12px;
+    }
+    
+    .doc-content p {
+        color: #e0e0e0;
+        line-height: 1.7;
+        margin-bottom: 16px;
+    }
+    
+    .doc-content ul {
+        color: #e0e0e0;
+        line-height: 1.8;
+        margin-bottom: 24px;
+        padding-left: 24px;
+    }
+    
+    .doc-content li {
+        margin: 8px 0;
+    }
+    
+    .doc-content code {
+        background: #1a1a1a;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #81C784;
+        font-family: "Roboto Mono", "Courier New", Courier, monospace;
+        font-size: 0.9em;
+    }
+    
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        .doc-container {
+            flex-direction: column;
+            padding: 15px;
+            gap: 20px;
+        }
+        
+        .doc-nav {
+            width: 100%;
+            position: relative;
+            top: 0;
+            max-height: none;
+            order: 2;
+        }
+        
+        .doc-content {
+            order: 1;
+            padding: 24px;
+        }
+        
+        .doc-content h1 {
+            font-size: 2em;
+        }
+        
+        .doc-content h2 {
+            font-size: 1.5em;
+        }
+        
+        .doc-content h3 {
+            font-size: 1.2em;
+        }
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+<div class="doc-container">
+    <nav class="doc-nav">
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#label">Label</a></li>
+            <li><a href="#textbox">TextBox</a></li>
+            <li><a href="#button">Button</a></li>
+        </ul>
+    </nav>
+    
+    <div class="doc-content">
+        <h1 id="introduction">NuiForms - Documentation</h1>
+        <p>Welcome to the NuiForms documentation. This library provides minimalist UI components for small applications.</p>
+        
+        <h2 id="label">Label</h2>
+        <p>The Label component is used to display text.</p>
+        <h3>Properties</h3>
+        <ul>
+            <li><code>text</code>: string - The text to display</li>
+            <li><code>align</code>: string - Text alignment</li>
+            <li><code>underline</code>: string - Underline style</li>
+        </ul>
+        
+        <h2 id="textbox">TextBox</h2>
+        <p>The TextBox component is used to display a text input field.</p>
+        <h3>Properties</h3>
+        <ul>
+            <li><code>text</code>: string - The text value</li>
+            <li><code>readonly</code>: boolean - Whether the field is read-only</li>
+            <li><code>hint</code>: string - Placeholder hint text</li>
+        </ul>
+        
+        <h2 id="button">Button</h2>
+        <p>The Button component is used to display a button.</p>
+        <h3>Properties</h3>
+        <ul>
+            <li><code>text</code>: string - The button text</li>
+            <li><code>onclick</code>: func() - Click handler function</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Highlight active navigation item on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.doc-content h1[id], .doc-content h2[id]');
+        const navLinks = document.querySelectorAll('.doc-nav a');
+        
+        function updateActiveNav() {
+            let current = '';
+            const scrollPos = window.pageYOffset + 150;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollPos >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                const href = link.getAttribute('href');
+                if (href === '#' + current || (current === '' && href === '#introduction')) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
+    });
+</script>
+
+{#bottom.html#}
+
