@@ -1,0 +1,168 @@
+{#header.html#}
+
+{%title=NuiForms - Projects%}
+{%description=Projects built with NuiForms library.%}
+
+<style>
+    .projects-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    
+    .projects-title {
+        text-align: center;
+        font-size: 2.5em;
+        margin: 0 0 16px 0;
+        font-weight: 700;
+        color: #64B5F6;
+        position: relative;
+    }
+    
+    .projects-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #64B5F6, #42A5F5);
+        border-radius: 2px;
+    }
+    
+    .projects-subtitle {
+        text-align: center;
+        color: #b0b0b0;
+        font-size: 1.1em;
+        margin: 0 0 48px 0;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+    
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+        margin: 40px 0;
+    }
+    
+    .project-card {
+        background: #2d2d2d;
+        border-radius: 12px;
+        padding: 32px 24px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+        border: 1px solid #424242;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #64B5F6, #42A5F5);
+    }
+    
+    .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        border-color: #64B5F6;
+        background: #363636;
+    }
+    
+    .project-name {
+        font-size: 1.6em;
+        font-weight: 600;
+        margin: 0 0 12px 0;
+        color: #64B5F6;
+    }
+    
+    .project-description {
+        color: #e0e0e0;
+        line-height: 1.6;
+        margin: 0 0 20px 0;
+    }
+    
+    .project-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 20px 0 0 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .project-feature {
+        display: inline-block;
+        padding: 4px 12px;
+        background: #1a1a1a;
+        border: 1px solid #424242;
+        border-radius: 16px;
+        color: #b0b0b0;
+        font-size: 0.85em;
+    }
+    
+    .project-platforms {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #424242;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+    
+    .platform-tag {
+        padding: 4px 10px;
+        background: #1a1a1a;
+        border: 1px solid #424242;
+        border-radius: 4px;
+        color: #81C784;
+        font-size: 0.85em;
+    }
+    
+    @media (max-width: 768px) {
+        .projects-container {
+            padding: 24px 15px;
+        }
+        
+        .projects-title {
+            font-size: 2em;
+        }
+        
+        .projects-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+</style>
+
+<div class="projects-container">
+    <h1 class="projects-title">Projects</h1>
+    <p class="projects-subtitle">Applications built with NuiForms</p>
+    
+    <div class="projects-grid">
+        <div class="project-card">
+            <h2 class="project-name">nuicom</h2>
+            <p class="project-description">File manager. Single file, no dependencies.</p>
+            <ul class="project-features">
+                <li class="project-feature">Single file</li>
+                <li class="project-feature">No dependencies</li>
+                <li class="project-feature">Open source</li>
+            </ul>
+            <div class="project-platforms">
+                <span class="platform-tag">Windows</span>
+                <span class="platform-tag">macOS</span>
+                <span class="platform-tag">Linux</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{#bottom.html#}
